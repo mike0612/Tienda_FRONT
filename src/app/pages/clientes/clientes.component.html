@@ -1,0 +1,59 @@
+<div class="container">
+  <h2 class="text-center mb-4">Gestión de Clientes</h2>
+  <form [formGroup]="clienteForm" (ngSubmit)="onSubmit()" class="mb-4">
+    <div class="form-row">
+      <div class="form-group col-md-4">
+        <label for="nombre">Nombre</label>
+        <input id="nombre" formControlName="nombre" class="form-control" type="text" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="apellidos">Apellidos</label>
+        <input id="apellidos" formControlName="apellidos" class="form-control" type="text" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="direccion">Dirección</label>
+        <input id="direccion" formControlName="direccion" class="form-control" type="text" />
+      </div>
+      <div class="form-group col-md-6">
+        <label for="articuloId">Artículo</label>
+        <select id="articuloId" formControlName="clienteArticulos" class="form-control"  multiple>
+          <option *ngFor="let articulo of articulos" [value]="articulo.articuloId">{{ articulo.descripcion }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-12 d-flex justify-content-end">
+        <button class="btn btn-primary" type="submit">{{ editMode ? 'Actualizar' : 'Crear' }}</button>
+        <button class="btn btn-secondary ml-2" type="button" (click)="resetForm()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+  <hr />
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Apellidos</th>
+          <th class="text-center">Dirección</th>
+          <th class="text-center">Artículo</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of clientes">
+          <td>{{ cliente.nombre }}</td>
+          <td>{{ cliente.apellidos }}</td>
+          <td>{{ cliente.direccion }}</td>
+          <td>{{ getArticuloDescripcion(cliente.clienteArticulos) }}</td>
+          <td>
+            <button class="btn btn-info btn-sm mr-2" (click)="onEdit(cliente)">
+              <i class="fas fa-edit"></i> Editar
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="onDelete(cliente.clienteId)">
+              <i class="fas fa-trash-alt"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,58 @@
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <section id="wrapper">
+      <div class="login-register" style="background-image:url(../assets/images/background/login-register.jpg);">
+        <div class="login-box card">
+          <div class="card-body">
+            <form class="form-horizontal form-material" [formGroup]="RegisterForm" id="loginform" (ngSubmit)="register()">
+              <h3 class="box-title m-b-20">Sign Up</h3>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <input class="form-control" type="email" formControlName="email" placeholder="Email" required>
+                  <div *ngIf="formSubmitted && email?.invalid" class="invalid-feedback">
+                    Email es requerido y debe ser válido.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <input class="form-control" type="password" formControlName="password" placeholder="Password" required>
+                  <div *ngIf="formSubmitted && password?.invalid" class="invalid-feedback">
+                    Contraseña es requerida.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12">
+                  <input class="form-control" type="password" formControlName="confirmPassword" placeholder="Confirm Password" required>
+                  <div *ngIf="formSubmitted && confirmPassword?.invalid" class="invalid-feedback">
+                    Confirmar contraseña es requerida.
+                  </div>
+                  <div *ngIf="formSubmitted && passwordsMismatch" class="invalid-feedback">
+                    Las contraseñas no coinciden.
+                  </div>
+                </div>
+              </div>
+              <div class="form-group text-center p-b-20">
+                <div class="col-xs-12">
+                  <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Registrar</button>
+                </div>
+              </div>
+              <div class="form-group m-b-0">
+                <div class="col-sm-12 text-center">
+                  ¿Ya tienes una cuenta? <a routerLink="/login" class="text-info m-l-5"><b>¡Inicia sesión!</b></a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+  <!-- ============================================================== -->
+  <!-- End Wrapper -->
+  <!-- ============================================================== -->

@@ -1,0 +1,71 @@
+<div class="container">
+  <h2 class="text-center mb-4">Gestión de Artículos</h2>
+  <form [formGroup]="articuloForm" (ngSubmit)="onSubmit()" class="mb-4">
+    <div class="form-row">
+      <div class="form-group col-md-2">
+        <label for="codigo">Código</label>
+        <input id="codigo" formControlName="codigo" class="form-control" type="text" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="descripcion">Descripción</label>
+        <input id="descripcion" formControlName="descripcion" class="form-control" type="text" />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="precio">Precio</label>
+        <input id="precio" formControlName="precio" class="form-control" type="number" />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="imagen">Imagen</label>
+        <input id="imagen" formControlName="imagen" class="form-control" type="text" />
+      </div>
+      <div class="form-group col-md-2">
+        <label for="stock">Stock</label>
+        <input id="stock" formControlName="stock" class="form-control" type="number" />
+      </div>
+      <div class="form-group col-md-4">
+        <label for="tiendaId">Tienda</label>
+        <select id="tiendaId" formControlName="tiendaId" class="form-control" required>
+          <option *ngFor="let tienda of tiendas" [value]="tienda.tiendaId">{{ tienda.sucursal }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-12 d-flex justify-content-end">
+        <button class="btn btn-primary" type="submit">{{ editMode ? 'Actualizar' : 'Crear' }}</button>
+        <button class="btn btn-secondary ml-2" type="button" (click)="resetForm()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+  <hr />
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered text-center">
+      <thead class="thead-light">
+        <tr>
+          <th class="text-center">Código</th>
+          <th class="text-center">Descripción</th>
+          <th class="text-center">Precio</th>
+          <th class="text-center">Imagen</th>
+          <th class="text-center">Stock</th>
+          <th class="text-center">Tienda</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let articulo of articulos">
+          <td>{{ articulo.codigo }}</td>
+          <td>{{ articulo.descripcion }}</td>
+          <td>{{ articulo.precio }}</td>
+          <td>{{ articulo.imagen }}</td>
+          <td>{{ articulo.stock }}</td>
+          <td>{{ getTiendaNombre(articulo.articuloTiendas) }}</td>
+          <td>
+            <button class="btn btn-info btn-sm mr-2" (click)="onEdit(articulo)">
+              <i class="fas fa-edit"></i> Editar
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="onDelete(articulo.articuloId)">
+              <i class="fas fa-trash-alt"></i> Eliminar
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
